@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zim | Full-Stack Architect</title>
+    <meta name="description" content="Md. Mohaiminul Islam Zim - Professional Developer based in Rangpur.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --surface-color: #0f0f13;
+            --primary-accent: #00d2ff;
+            --secondary-accent: #3a7bd5;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --card-border: rgba(0, 210, 255, 0.1);
+            --glow: 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Particles & Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.15) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent));
+            background-clip: text;
+            /* Standard property */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            /* Fallback color */
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+
+        /* Modern Navbar */
+        .navbar {
+            background: rgba(5, 5, 5, 0.8) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 0;
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-accent);
+            transition: 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--text-main) !important;
+        }
+
+        /* Custom Cards (Neo-Brutalism + Glassmorphism mix) */
+        .pro-card {
+            background: var(--surface-color);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+
+        .pro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.05), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .pro-card:hover::before {
+            left: 100%;
+        }
+
+        .pro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: rgba(0, 210, 255, 0.3);
+        }
+
+        /* Buttons */
+        .btn-neon {
+            background: transparent;
+            color: var(--primary-accent);
+            border: 2px solid var(--primary-accent);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+            z-index: 1;
+            display: inline-block;
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary-accent);
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .btn-neon:hover::before {
+            width: 100%;
+        }
+
+        .btn-neon:hover {
+            color: #000;
+            box-shadow: var(--glow);
+        }
+
+        /* Timeline (Long scrolling element) */
+        .timeline-container {
+            position: relative;
+            border-left: 2px dashed rgba(255, 255, 255, 0.1);
+            padding-left: 3rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-node {
+            position: absolute;
+            left: -3.6rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--surface-color);
+            border: 4px solid var(--primary-accent);
+            box-shadow: var(--glow);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        /* Progress Bars */
+        .skill-bar-container {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+            border-radius: 20px;
+            position: relative;
+        }
+
+        /* Misc */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        /* Accordion (FAQ) */
+        .accordion-item {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            border-radius: 15px !important;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background: var(--surface-color);
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 1.5rem;
+            box-shadow: none !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--primary-accent);
+        }
+
+        .accordion-body {
+            background: var(--surface-color);
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Forms */
+        .form-control {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-accent);
+            color: #fff;
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            background: var(--surface-color);
+            padding-top: 5rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: 0.3s;
+            margin: 0 10px;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-accent);
+            color: #000;
+            border-color: var(--primary-accent);
+            box-shadow: var(--glow);
+            transform: translateY(-5px);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-accent);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gradient-bg"></div>
+    <div id="particles-js"></div>
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fs-3 fw-bold" href="#">ZIM<span class="text-gradient">.DEV</span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <i class="bi bi-list fs-1 text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                </ul>
+                <a href="#contact" class="btn-neon px-4 py-2" style="font-size: 0.8rem;">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="min-vh-100 d-flex align-items-center">
+        <div class="container mt-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1500">
+                    <div class="section-tag mb-4">Welcome to my universe</div>
+                    <h1 class="hero-title">
+                        I build <br> <span class="text-gradient" id="typed-text"></span>
+                    </h1>
+                    <p class="lead text-muted mb-5 w-75">
+                        Hello, I'm <span class="text-white fw-bold">Md. Mohaiminul Islam Zim</span>. A professional
+                        full-stack engineer from Rangpur, transforming complex logic into scalable and elegant web
+                        applications.
+                    </p>
+                    <div class="d-flex gap-4 align-items-center flex-wrap">
+                        <a href="#portfolio" class="btn-neon"><i class="bi bi-rocket-takeoff me-2"></i> Explore
+                            Projects</a>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-success rounded-circle"
+                                style="width: 12px; height: 12px; box-shadow: 0 0 10px #198754;"></div>
+                            <span class="text-muted fw-bold text-uppercase" style="letter-spacing: 2px;">Available for
+                                Freelance</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block" data-aos="zoom-in" data-aos-duration="1500">
+                    <div class="pro-card text-center"
+                        style="transform: perspective(1000px) rotateY(-15deg); box-shadow: -20px 20px 50px rgba(0,0,0,0.5);">
+                        <i class="bi bi-terminal-fill display-1 text-gradient mb-4"></i>
+                        <h3 class="mb-3">System Logic</h3>
+                        <p class="text-muted small">Running complex Laravel and Javascript logic securely.</p>
+                        <hr class="border-secondary my-4">
+                        <div class="d-flex justify-content-between text-muted small fw-bold">
+                            <span>Status:</span>
+                            <span class="text-success">Online & Compiling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container border-top border-bottom py-5" style="border-color: rgba(255,255,255,0.05) !important;">
+        <div class="row text-center g-4">
+            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="display-4 fw-black text-gradient">50+</h2>
+                <p class="text-uppercase text-muted fw-bold letter-spacing-1">Projects Delivered</p>
+            </div>
+            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="display-4 fw-black text-gradient">99%</h2>
+                <p class="text-uppercase text-muted fw-bold letter-spacing-1">Client Satisfaction</p>
+            </div>
+            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="display-4 fw-black text-gradient">04</h2>
+                <p class="text-uppercase text-muted fw-bold letter-spacing-1">Years Coding</p>
+            </div>
+            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                <h2 class="display-4 fw-black text-gradient">24/7</h2>
+                <p class="text-uppercase text-muted fw-bold letter-spacing-1">Server Support</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">My Journey</div>
+                <h2 class="display-4 mb-3">Education & <span class="text-gradient">Experience</span></h2>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="pro-card p-5 h-100">
+                        <h3 class="mb-5"><i class="bi bi-mortarboard me-3 text-primary-accent"></i> Academic Track</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-item">
+                                <div class="timeline-node"></div>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary px-3 py-2 mb-3">2024
+                                    - Present</span>
+                                <h4>Diploma in Computer Science & Technology</h4>
+                                <h6 class="text-gradient">Rangpur Polytechnic Institute</h6>
+                                <p class="text-muted mt-3">Currently mastering advanced algorithms, data structures, and
+                                    complex engineering principles to build robust software systems.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-node"></div>
+                                <span
+                                    class="badge bg-secondary-subtle text-light border border-secondary px-3 py-2 mb-3">2021
+                                    - 2023</span>
+                                <h4>Secondary School Certificate</h4>
+                                <h6 class="text-muted">Science Background</h6>
+                                <p class="text-muted mt-3">Developed a strong foundation in mathematics and logic,
+                                    paving the way for my programming career.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="pro-card p-5 h-100">
+                        <h3 class="mb-5"><i class="bi bi-cpu me-3 text-primary-accent"></i> Core Arsenal</h3>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2 fw-bold"><span>Laravel & PHP</span><span
+                                    class="text-gradient">95%</span></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2 fw-bold"><span>JavaScript / Vue</span><span
+                                    class="text-gradient">88%</span></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2 fw-bold"><span>Tailwind CSS &
+                                    Bootstrap</span><span class="text-gradient">92%</span></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2 fw-bold"><span>Database Design
+                                    (MySQL)</span><span class="text-gradient">85%</span></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 p-4 rounded-4"
+                            style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
+                            <canvas id="skillsRadar"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="bg-dark bg-opacity-50">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">What I Do</div>
+                <h2 class="display-4">Specialized <span class="text-gradient">Solutions</span></h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="pro-card text-center h-100">
+                        <i class="bi bi-code-square display-3 text-gradient mb-4"></i>
+                        <h4 class="mb-3">Web Development</h4>
+                        <p class="text-muted">End-to-end development using Laravel and modern JavaScript frameworks for
+                            fast rendering.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="pro-card text-center h-100">
+                        <i class="bi bi-database-check display-3 text-gradient mb-4"></i>
+                        <h4 class="mb-3">Database Architecture</h4>
+                        <p class="text-muted">Designing scalable and secure MySQL databases ensuring zero data loss and
+                            high query speed.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="pro-card text-center h-100">
+                        <i class="bi bi-palette display-3 text-gradient mb-4"></i>
+                        <h4 class="mb-3">UI/UX Integration</h4>
+                        <p class="text-muted">Translating Figma designs into pixel-perfect HTML, CSS, Bootstrap, or
+                            Tailwind interfaces.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="pro-card text-center h-100">
+                        <i class="bi bi-phone display-3 text-gradient mb-4"></i>
+                        <h4 class="mb-3">Responsive Design</h4>
+                        <p class="text-muted">Creating fluid layouts that look beautiful on mobile, tablet, and
+                            ultra-wide 4K monitors.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="pro-card text-center h-100">
+                        <i class="bi bi-shield-lock display-3 text-gradient mb-4"></i>
+                        <h4 class="mb-3">API Security</h4>
+                        <p class="text-muted">Building secure REST APIs with token-based authentication and
+                            rate-limiting.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="pro-card text-center h-100">
+                        <i class="bi bi-speedometer2 display-3 text-gradient mb-4"></i>
+                        <h4 class="mb-3">Performance SEO</h4>
+                        <p class="text-muted">Optimizing code structure, caching, and server configurations to score 100
+                            on Google Lighthouse.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Portfolio</div>
+                <h2 class="display-4">Recent <span class="text-gradient">Case Studies</span></h2>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="pro-card p-3 p-md-4">
+                        <div class="position-relative overflow-hidden rounded-4 mb-4" style="height: 300px;">
+                            <img src="https://via.placeholder.com/800x600/0f0f13/00d2ff?text=Coffee+Paradise+Landing"
+                                class="img-fluid w-100 h-100 object-fit-cover" alt="Coffee Paradise">
+                            <div
+                                class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center opacity-0 hover-opacity-100 transition-03s">
+                                <a href="https://mohaiminulislamzim4042.github.io/Coffee-Paradise-/" target="_blank"
+                                    class="btn btn-light rounded-circle p-3"><i
+                                        class="bi bi-link-45deg fs-2 text-dark"></i></a>
+                            </div>
+                        </div>
+                        <h3>Coffee Paradise</h3>
+                        <p class="text-muted">A highly interactive frontend landing page for a premium coffee brand,
+                            utilizing advanced CSS animations and AOS library.</p>
+                        <hr class="border-secondary my-3">
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="badge bg-dark border border-secondary p-2">HTML5</span>
+                            <span class="badge bg-dark border border-secondary p-2">Bootstrap 5</span>
+                            <span class="badge bg-dark border border-secondary p-2">JS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pro-card p-3 p-md-4">
+                        <div class="position-relative overflow-hidden rounded-4 mb-4" style="height: 300px;">
+                            <img src="https://via.placeholder.com/800x600/0f0f13/00d2ff?text=Smart+Inventory+System"
+                                class="img-fluid w-100 h-100 object-fit-cover" alt="Inventory">
+                        </div>
+                        <h3>Smart Inventory ERP</h3>
+                        <p class="text-muted">A full-stack Laravel application designed for retail shops to track
+                            products, manage sales, and generate automated PDF invoices.</p>
+                        <hr class="border-secondary my-3">
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="badge bg-dark border border-secondary p-2">Laravel 10</span>
+                            <span class="badge bg-dark border border-secondary p-2">MySQL</span>
+                            <span class="badge bg-dark border border-secondary p-2">Tailwind CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="pro-card p-3 p-md-4">
+                        <div class="position-relative overflow-hidden rounded-4 mb-4" style="height: 300px;">
+                            <img src="https://via.placeholder.com/800x600/0f0f13/00d2ff?text=School+Management"
+                                class="img-fluid w-100 h-100 object-fit-cover" alt="School">
+                        </div>
+                        <h3>School Management DB</h3>
+                        <p class="text-muted">Complex backend architecture handling student admissions, teacher payroll,
+                            and result processing with dynamic chart reporting.</p>
+                        <hr class="border-secondary my-3">
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="badge bg-dark border border-secondary p-2">PHP OOP</span>
+                            <span class="badge bg-dark border border-secondary p-2">AJAX</span>
+                            <span class="badge bg-dark border border-secondary p-2">Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pro-card p-3 p-md-4">
+                        <div class="position-relative overflow-hidden rounded-4 mb-4" style="height: 300px;">
+                            <img src="https://via.placeholder.com/800x600/0f0f13/00d2ff?text=Personal+Portfolio"
+                                class="img-fluid w-100 h-100 object-fit-cover" alt="Portfolio">
+                        </div>
+                        <h3>Pro Developer Portfolio</h3>
+                        <p class="text-muted">A highly customized single-page portfolio with glassmorphism,
+                            neo-brutalism design patterns, and interactive particle logic.</p>
+                        <hr class="border-secondary my-3">
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="badge bg-dark border border-secondary p-2">Vanilla JS</span>
+                            <span class="badge bg-dark border border-secondary p-2">CSS Variables</span>
+                            <span class="badge bg-dark border border-secondary p-2">Particles.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="bg-dark bg-opacity-50">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Hire Me</div>
+                <h2 class="display-4">Investment <span class="text-gradient">Plans</span></h2>
+            </div>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="pro-card">
+                        <h4 class="mb-3">Frontend UI</h4>
+                        <h2 class="display-5 text-gradient mb-4">$150<span class="fs-6 text-muted">/project</span></h2>
+                        <ul class="list-unstyled mb-5">
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> 5 Pages
+                                HTML/CSS</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Responsive
+                                Design</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> AOS Animations
+                            </li>
+                            <li class="mb-3 text-muted"><i class="bi bi-x-circle me-2"></i> Backend Logic</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-light w-100 rounded-pill py-3 fw-bold">Select Plan</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" data-aos="zoom-in">
+                    <div class="pro-card"
+                        style="border-color: var(--primary-accent); transform: scale(1.05); z-index: 2;">
+                        <div class="position-absolute top-0 end-0 bg-primary-accent text-dark fw-bold px-3 py-1 rounded-bl"
+                            style="background: var(--primary-accent);">POPULAR</div>
+                        <h4 class="mb-3">Full-Stack App</h4>
+                        <h2 class="display-5 text-gradient mb-4">$500<span class="fs-6 text-muted">/project</span></h2>
+                        <ul class="list-unstyled mb-5">
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Custom Laravel
+                                Admin Panel</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Database
+                                Architecture</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Authentication
+                                & Security</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> 1 Month Free
+                                Support</li>
+                        </ul>
+                        <a href="#contact" class="btn-neon w-100 py-3 text-center">Select Plan</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-left">
+                    <div class="pro-card">
+                        <h4 class="mb-3">Enterprise SaaS</h4>
+                        <h2 class="display-5 text-gradient mb-4">Custom<span class="fs-6 text-muted">/monthly</span>
+                        </h2>
+                        <ul class="list-unstyled mb-5">
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Complex
+                                Multi-tenant Logic</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Payment Gateway
+                                Setup</li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> API Development
+                            </li>
+                            <li class="mb-3"><i class="bi bi-check-circle text-primary-accent me-2"></i> Server
+                                Deployment (VPS)</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-light w-100 rounded-pill py-3 fw-bold">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="section-tag">F.A.Q</div>
+                    <h2 class="display-4 mb-4">Got <span class="text-gradient">Questions?</span></h2>
+                    <p class="text-muted mb-5">Here are some of the most common questions clients ask me before starting
+                        a project.</p>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="accordion" id="zimFaq">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq1">What technologies do you
+                                    use?</button></h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#zimFaq">
+                                <div class="accordion-body">I specialize in HTML, CSS, JavaScript (Vanilla & Vue),
+                                    Bootstrap, Tailwind CSS for frontend. For backend, I rely heavily on PHP and Laravel
+                                    framework with MySQL databases.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq2">How long does a project
+                                    take?</button></h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#zimFaq">
+                                <div class="accordion-body">A standard landing page takes 3-5 days. A complex full-stack
+                                    Laravel application can take anywhere from 2 weeks to 2 months depending on the
+                                    logic complexity.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq3">Do you provide server hosting
+                                    setup?</button></h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#zimFaq">
+                                <div class="accordion-body">Yes, I can deploy your Laravel applications on shared
+                                    hosting (cPanel) or configure a custom VPS server depending on your traffic
+                                    requirements.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-dark bg-opacity-50">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Let's Connect</div>
+                <h2 class="display-4">Start a <span class="text-gradient">Conversation</span></h2>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="pro-card h-100">
+                        <h3 class="mb-4">Contact Details</h3>
+                        <p class="text-muted mb-5">I'm currently available for freelance work and full-time remote
+                            opportunities.</p>
+
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary-subtle text-primary rounded-circle d-flex justify-content-center align-items-center"
+                                style="width: 50px; height: 50px;"><i class="bi bi-geo-alt fs-4"></i></div>
+                            <div class="ms-4">
+                                <h6 class="mb-1 fw-bold">Location</h6>
+                                <p class="text-muted mb-0">Rangpur, Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary-subtle text-primary rounded-circle d-flex justify-content-center align-items-center"
+                                style="width: 50px; height: 50px;"><i class="bi bi-envelope fs-4"></i></div>
+                            <div class="ms-4">
+                                <h6 class="mb-1 fw-bold">Email Area</h6>
+                                <p class="text-muted mb-0">mizim4042@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-5">
+                            <div class="bg-primary-subtle text-primary rounded-circle d-flex justify-content-center align-items-center"
+                                style="width: 50px; height: 50px;"><i class="bi bi-telephone fs-4"></i></div>
+                            <div class="ms-4">
+                                <h6 class="mb-1 fw-bold">Direct Call</h6>
+                                <p class="text-muted mb-0">+8801805229401</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="pro-card h-100">
+                        <h3 class="mb-4">Send a Message</h3>
+                        <form>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted small fw-bold">Your Name</label>
+                                    <input type="text" class="form-control" placeholder="John Doe">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted small fw-bold">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="john@example.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-muted small fw-bold">Subject</label>
+                                    <input type="text" class="form-control" placeholder="Project Inquiry">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-muted small fw-bold">Your Message</label>
+                                    <textarea class="form-control" rows="5"
+                                        placeholder="Tell me about your project requirements..."></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="button" class="btn-neon w-100 border-0">Send Message <i
+                                            class="bi bi-send ms-2"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container pb-5">
+            <div class="row g-5">
+                <div class="col-lg-4 pe-lg-5">
+                    <a class="navbar-brand fs-2 fw-bold text-white mb-4 d-block" href="#">ZIM<span
+                            class="text-gradient">.DEV</span></a>
+                    <p class="text-muted mb-4">Architecting robust digital solutions from Rangpur to the world. Let's
+                        write code that matters.</p>
+                    <div class="d-flex">
+                        <a href="https://github.com/mohaiminulislamzim4042" class="social-icon"><i
+                                class="bi bi-github"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4 fw-bold">Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="#hero" class="text-muted text-decoration-none hover-primary">Home
+                                Section</a></li>
+                        <li class="mb-3"><a href="#about" class="text-muted text-decoration-none">About Me</a></li>
+                        <li class="mb-3"><a href="#services" class="text-muted text-decoration-none">My Services</a>
+                        </li>
+                        <li class="mb-3"><a href="#portfolio" class="text-muted text-decoration-none">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4 fw-bold">Legal & Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-3"><a href="#" class="text-muted text-decoration-none">Terms of Service</a></li>
+                        <li class="mb-3"><a href="#" class="text-muted text-decoration-none">Resume (PDF)</a></li>
+                        <li class="mb-3"><a href="#faq" class="text-muted text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4 fw-bold">Newsletter</h5>
+                    <p class="text-muted mb-4">Subscribe to get updates on my latest tech insights and project releases.
+                    </p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email address" aria-label="Email address">
+                        <button class="btn btn-outline-info" type="button"
+                            style="border-color: var(--primary-accent); color: var(--primary-accent);">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container border-top py-4 text-center" style="border-color: rgba(255,255,255,0.05) !important;">
+            <p class="text-muted small mb-0">&copy; 2026 Md. Mohaiminul Islam Zim. All Rights Reserved. Engineered with
+                precision.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        // 1. Initialize AOS Animations
+        AOS.init({ duration: 1000, once: true, offset: 50 });
+
+        // 2. Navbar Scroll Effect
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) { document.getElementById('mainNav').classList.add('scrolled'); }
+            else { document.getElementById('mainNav').classList.remove('scrolled'); }
+        });
+
+        // 3. Typed.js Setup
+        new Typed('#typed-text', {
+            strings: ['Web Applications.', 'Database Systems.', 'Complex Logic.', 'Laravel Backends.'],
+            typeSpeed: 50, backSpeed: 30, backDelay: 1500, loop: true
+        });
+
+        // 4. Custom Particles Setup
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 1000 } },
+                "color": { "value": "#00d2ff" },
+                "shape": { "type": "edge" },
+                "opacity": { "value": 0.2, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 200, "color": "#3a7bd5", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": true, "mode": "repulse" }, "resize": true },
+                "modes": { "bubble": { "distance": 250, "size": 0, "duration": 2, "opacity": 0, "speed": 3 }, "repulse": { "distance": 400, "duration": 0.4 } }
+            },
+            "retina_detect": true
+        });
+
+        // 5. Radar Chart for Skills (Fixed Brackets)
+        const chartElement = document.getElementById('skillsRadar');
+        if (chartElement) {
+            new Chart(chartElement.getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ['Laravel', 'Vue/JS', 'SQL DB', 'UI/UX', 'API Auth', 'System Logic'],
+                    datasets: [{
+                        label: 'Core Expertise',
+                        data: [95, 88, 85, 92, 90, 95],
+                        backgroundColor: 'rgba(0, 210, 255, 0.2)',
+                        borderColor: '#00d2ff',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#3a7bd5',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#00d2ff'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#9ca3af', font: { size: 12, family: "'Outfit', sans-serif" } },
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
